@@ -1,13 +1,16 @@
+/* main.c */
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+// Функция для проверки, является ли число полным квадратом
 int isPerfectSquare(int num) {
   int sqrtNum = (int)sqrt(num);
   return (sqrtNum * sqrtNum == num);
 }
 
+// Структура PERSON
 typedef struct {
   char Name[50];
   char FAC[50];
@@ -18,17 +21,21 @@ typedef struct {
   int DAY;
 } PERSON;
 
-int compareDates(const void *a, const void *b) {
-  PERSON *personA = (PERSON *)a;
-  PERSON *personB = (PERSON *)b;
-
-  if (personA->YEAR != personB->YEAR)
-    return personA->YEAR - personB->YEAR;
-  if (personA->MONTH != personB->MONTH)
-    return personA->MONTH - personB->MONTH;
-  return personA->DAY - personB->DAY;
+// Функция для сравнения дат (для сортировки)
+int compareDates(PERSON a, PERSON b) {
+  if (a.YEAR != b.YEAR)
+    return a.YEAR - b.YEAR;
+  if (a.MONTH != b.MONTH)
+    return a.MONTH - b.MONTH;
+  return a.DAY - b.DAY;
 }
 
+// Функция для сравнения строк (для сортировки по фамилиям)
+int compareNames(const void *a, const void *b) {
+  return strcmp(((PERSON *)a)->Name, ((PERSON *)b)->Name);
+}
+
+// Функция для сравнения по факультету, специальности, группе и дате
 int compareAll(const void *a, const void *b) {
   PERSON *personA = (PERSON *)a;
   PERSON *personB = (PERSON *)b;
@@ -45,10 +52,11 @@ int compareAll(const void *a, const void *b) {
   if (groupCompare != 0)
     return groupCompare;
 
-  return compareDates(personA, personB);
+  return compareDates(*personA, *personB);
 }
 
 int main() {
+  // Задача 1: Вывод чисел, не являющихся полными квадратами
   int n;
   printf("Введите размерность массива: ");
   scanf("%d", &n);
@@ -69,8 +77,10 @@ int main() {
 
   free(arr);
 
+  // Задача 2: Работа со структурой PERSON
   PERSON VUZ[10];
 
+  // Ввод данных
   printf("\nВведите данные о студентах:\n");
   for (int i = 0; i < 10; i++) {
     printf("Студент %d:\n", i + 1);
@@ -86,9 +96,13 @@ int main() {
     scanf("%d %d %d", &VUZ[i].YEAR, &VUZ[i].MONTH, &VUZ[i].DAY);
   }
 
+  // Сортировка по дате поступления
   qsort(VUZ, 10, sizeof(PERSON), compareDates);
+
+  // Сортировка по факультету, специальности, группе и дате
   qsort(VUZ, 10, sizeof(PERSON), compareAll);
 
+  // Вывод отсортированных данных
   printf("\nОтсортированные данные о студентах:\n");
   for (int i = 0; i < 10; i++) {
     printf("Фамилия: %s\n", VUZ[i].Name);
