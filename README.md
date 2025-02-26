@@ -1,11 +1,13 @@
 # Overview
 
-It is public template of assignment `"labrabota 3"` for FPMI students
+Это общедоступный шаблон для задания "Лабораторная работа 2", предназначенный для студентов FPMI. Он служит отправной точкой для эффективного выполнения лабораторной работы.
 
 # Usage
 
-Please, edit README and add some details, as instance **{add your last name, first name and group number}**.
+Евтухович Лера 9 группа
 
 # Building
 
-Please, import repository and use for repl.it project, which is defined in the assignment "labrabota 3".
+Импортируйте этот репозиторий в свою учетную запись на GitHub.
+Используйте его для своего it-проекта Reply, как указано в инструкции по выполнению задания "Labrabota 2".
+Не стесняйтесь изменять и расширять шаблон по мере необходимости!
